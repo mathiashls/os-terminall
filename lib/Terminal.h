@@ -1,10 +1,3 @@
-/*
- * Terminal.h
- *
- *  Created on: Oct 28, 2015
- *      Author: arliones
- */
-
 #ifndef TERMINAL_H_
 #define TERMINAL_H_
 
@@ -32,4 +25,4 @@ private:
     ProcessMap _processes;
 };
 
-#endif /* TERMINAL_H_ */
+#endif 

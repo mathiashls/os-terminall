@@ -1,10 +1,3 @@
-//============================================================================
-// Name        : TerminALL.cpp
-// Author      : Arliones Hoeller Jr.
-// Version     : TerminALL project template
-// Copyright   : most recent GPL
-//============================================================================
-
 #include <iostream>
 #include <Terminal.h>
 
