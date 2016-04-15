@@ -15,7 +15,6 @@ class Process {
     int espera();
     pid_t pid();
     int status();
-    std::string command;
 
   private:
 

@@ -16,7 +16,6 @@ using namespace std;
 Process::Process(string & program, vector<string> & params, bool block) {
 
   
-  command = program.c_str();  
   int pid = fork();
   
   if(pid==-1) {
@@ -32,7 +31,6 @@ Process::Process(string & program, vector<string> & params, bool block) {
 
   }
 
-  _my_pid = pid;
 
   if(block == true) {
 
@@ -69,7 +67,7 @@ int Process::status() {
 
 }
 
-void Process::exec(std::string & program, std::vector<std::string> & params) {
+void Process::exec(string & program, vector<string> & params) {
 
   int pid;
   bool hasPath;  
@@ -82,7 +80,7 @@ void Process::exec(std::string & program, std::vector<std::string> & params) {
 
   char *foo[255];  
 
-  for (int i=0;i<params.size();i++) {
+  for(int i=0; i<params.size(); i++) {
 
     foo[i] = string_to_c_convert(params[i]);
 
@@ -93,7 +91,6 @@ void Process::exec(std::string & program, std::vector<std::string> & params) {
     }
 
   }
-
 
   if(hasPath == true) {
 

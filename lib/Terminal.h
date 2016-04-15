@@ -8,21 +8,26 @@
 #include "Process.h"
 
 class Terminal {
-public:
-    Terminal();
-    virtual ~Terminal();
 
-    int run();
-    pid_t pid();
-
-private:
-    std::string trim(std::string& str);
-    bool extract_cmd(std::string cmd, std::vector<std::string> * tokens);
+  private:
 
     pid_t _my_pid;
     pid_t _parent;
     typedef std::map<pid_t,Process*> ProcessMap;
     ProcessMap _processes;
+
+  public:
+
+    Terminal();
+    virtual ~Terminal();
+    int run();
+    pid_t pid();
+
+  private:
+
+    std::string trim(std::string& str);
+    void tokenizer(std::string cmd, std::vector<std::string> * tokens);
+
 };
 
 #endif 
