@@ -15,6 +15,7 @@ class Terminal {
     pid_t _parent;
     typedef std::map<pid_t,Process*> ProcessMap;
     ProcessMap _processes;
+    void showMap();
 
   public:
 
@@ -26,7 +27,7 @@ class Terminal {
   private:
 
     std::string trim(std::string& str);
-    void tokenizer(std::string cmd, std::vector<std::string> * tokens);
+    bool ultranizer(std::string cmd, std::vector<std::string> * tokens);
 
 };
 

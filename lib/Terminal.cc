@@ -52,27 +52,16 @@ int Terminal::run() {
     uid_t  uid;
     p = getpwuid(uid = getuid());
  
-  
-    cout << "[" << p->pw_name << "@" << hostname << " ~]$ ";
-    getline(cin, cmdline);
+    do {
 
-    cmdline = trim(cmdline); // Using trim function to take off the trash in the begin and final of the string
+      cout << "[" << p->pw_name << "@" << hostname << " ~]$ ";
+      getline(cin, cmdline);
 
+    } while(cmdline=="");
+
+    cmdline = trim(cmdline); 
     int cmd_size = cmdline.size();
-
-    if(cmdline[cmd_size-1] == '&') {
-
-      lock = false;
-
-    } else {
-
-      lock = true;
-  
-    }
-
-    tokenizer(cmdline, &stuart);
-
-    
+    lock = ultranizer(cmdline, &stuart);
 
     // Now, we take care about what the user want to do
 
@@ -83,24 +72,52 @@ int Terminal::run() {
     } 
 
     Process proc(stuart[0], stuart, lock);
-     
+
+    if(lock == false) {
+
+      _processes.insert(make_pair(proc.pid(), &proc));
+
+    }
+
   } while(true);
 
 }
 
+void Terminal::showMap() {
 
+  ProcessMap::iterator tracker = _processes.begin();
+
+  cout << "PID / Processo" << endl << endl;
+
+  do {
+
+    cout << tracker->first << " / " << tracker->second->name << endl;
+
+  } while(tracker != _processes.end()); 
+
+}
 
 // Trim code by arliones 
 // HERE IS HOW TO TRIM SPACES FROM THE BORDERS OF A STRING
 string Terminal::trim(string& str) {
 
-    size_t first = str.find_first_not_of(' ');
-    size_t last = str.find_last_not_of(' ');
-    return str.substr(first, (last-first+1));
+  size_t first = str.find_first_not_of(' ');
+  size_t last = str.find_last_not_of(' ');
+  return str.substr(first, (last-first+1));
+
 }
 
-void Terminal::tokenizer(string cmd, std::vector<string> * tokens) {
+bool Terminal::ultranizer(string cmd, std::vector<string> * tokens) {
 
+ /*
+  *   Ultranizer - The tolkenizer, ultra implemented
+  *
+  *   This function do what a tokenizer must do, and more.
+  *   Break the string into tokens and push it all inside the vector.
+  *   If the last char of the vector is a '&', the ultranizer delete 
+  *   it and return false.
+  */
+ 
   int aux = 0; 
 
   for(int i=0; i<cmd.size(); i=aux-1) {
@@ -111,5 +128,12 @@ void Terminal::tokenizer(string cmd, std::vector<string> * tokens) {
     aux = pos + 1;
      
   }
+
+  if(tokens->back() == "&") {
+
+    tokens->pop_back();
+    return false;
+
+  } else return true;
 
 }

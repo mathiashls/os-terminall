@@ -15,8 +15,8 @@ using namespace std;
 
 Process::Process(string & program, vector<string> & params, bool block) {
 
-  
   int pid = fork();
+  name = program.c_str();
   
   if(pid==-1) {
 
@@ -70,7 +70,7 @@ int Process::status() {
 void Process::exec(string & program, vector<string> & params) {
 
   int pid;
-  bool hasPath;  
+  bool hasPath=false;  
   
   if(program[0]=='/') {
 
@@ -78,7 +78,7 @@ void Process::exec(string & program, vector<string> & params) {
 
   }
 
-  char *foo[255];  
+  char * foo[255];  
 
   for(int i=0; i<params.size(); i++) {
 
@@ -94,9 +94,9 @@ void Process::exec(string & program, vector<string> & params) {
 
   if(hasPath == true) {
 
-    if(execvp(foo[0], foo) == -1) {
+    if(execv(foo[0], foo) == -1) {
 
-      cerr << "Erro: comando inexistente." << endl;
+      cerr << "Erro: comando inexistente (path)." << endl;
 
     }
 
@@ -106,9 +106,9 @@ void Process::exec(string & program, vector<string> & params) {
 
   if(hasPath == false) {
 
-    if(execv(foo[0], foo) == -1) {
+    if(execvp(foo[0], foo) == -1) {
 
-      cerr << "Erro: comando inexistente." << endl;
+      cerr << "Erro: comando inexistente(no path)." << endl;
  
     }
 

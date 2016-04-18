@@ -26,6 +26,7 @@ class Process {
     pid_t  _my_pid;
     pid_t  _parent;
     int _status;
+    string name;
 
 };
 
