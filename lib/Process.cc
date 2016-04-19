@@ -17,7 +17,13 @@ Process::Process(string & program, vector<string> & params, bool block) {
 
   int pid = fork();
   name = program.c_str();
-  
+
+  if(pid > 0) {
+
+    _my_pid = pid;
+
+  }
+
   if(pid==-1) {
 
     cerr << "Erro no fork!" << endl;
@@ -26,11 +32,9 @@ Process::Process(string & program, vector<string> & params, bool block) {
   } else if (pid==0) {
 
     cout << "Vader, I'm your son!" << endl;
-    _my_pid = getpid();
     exec(program, params);
 
   }
-
 
   if(block == true) {
 
@@ -38,7 +42,7 @@ Process::Process(string & program, vector<string> & params, bool block) {
 
   }
 
-  _parent = getpid(); 
+  _parent = getppid(); 
 
 }
 
@@ -78,7 +82,7 @@ void Process::exec(string & program, vector<string> & params) {
 
   }
 
-  char * foo[255];  
+  char * foo[333];  
 
   for(int i=0; i<params.size(); i++) {
 

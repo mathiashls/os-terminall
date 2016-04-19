@@ -15,6 +15,7 @@ class Process {
     int espera();
     pid_t pid();
     int status();
+    std::string name;
 
   private:
 
@@ -26,7 +27,6 @@ class Process {
     pid_t  _my_pid;
     pid_t  _parent;
     int _status;
-    string name;
 
 };
 

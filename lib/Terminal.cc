@@ -69,13 +69,25 @@ int Terminal::run() {
       
       exit(0);
 
-    } 
+    }
 
-    Process proc(stuart[0], stuart, lock);
+    if(stuart[0] == "hbottom") {
 
-    if(lock == false) {
+      if(not _processes.empty()) {
 
-      _processes.insert(make_pair(proc.pid(), &proc));
+        showMap();
+
+      }
+  
+    } else { 
+
+      Process proc(stuart[0], stuart, lock);
+
+      if(lock == false) {
+
+        _processes.insert(make_pair(proc.pid(), &proc));
+
+      }
 
     }
 
@@ -87,11 +99,13 @@ void Terminal::showMap() {
 
   ProcessMap::iterator tracker = _processes.begin();
 
-  cout << "PID / Processo" << endl << endl;
+  system("clear");
+  cout << " PID   User  " << endl << endl;
 
   do {
 
-    cout << tracker->first << " / " << tracker->second->name << endl;
+    cout << tracker->first << "   " << tracker->second->name << endl;
+    tracker++;
 
   } while(tracker != _processes.end()); 
 
