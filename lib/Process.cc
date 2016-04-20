@@ -15,110 +15,110 @@ using namespace std;
 
 Process::Process(string & program, vector<string> & params, bool block) {
 
-  int pid = fork();
-  name = program.c_str();
+    int pid = fork();
+    name = program.c_str();
 
-  if(pid > 0) {
+    if(pid > 0) {
 
-    _my_pid = pid;
+        _my_pid = pid;
 
-  }
+    }
 
-  if(pid==-1) {
+    if(pid==-1) {
 
-    cerr << "Erro no fork!" << endl;
-    exit(-1);
+        cerr << "Erro no fork!" << endl;
+        exit(-1);
   
-  } else if (pid==0) {
+    } else if (pid==0) {
 
-    cout << "Vader, I'm your son!" << endl;
-    exec(program, params);
+        cout << "Vader, I'm your son!" << endl;
+        exec(program, params);
 
-  }
+    }
 
-  if(block == true) {
+    if(block == true) {
 
-    espera();
+        espera();
 
-  }
+    }
 
-  _parent = getppid(); 
+    _parent = getppid(); 
 
 }
 
 Process::~Process() {
 
-  // Self-destruction behavior can hurt you
+    // Self-destruction behavior can hurt you
 
 }
 
 int Process::espera() {
 
-  int foo = status();
-  wait(&foo);
+    int foo = status();
+    wait(&foo);
 
 }
 
 pid_t Process::pid() {
 
-  return _my_pid;
+    return _my_pid;
 
 }
 
 int Process::status() {
 
-  return _status;
+    return _status;
 
 }
 
 void Process::exec(string & program, vector<string> & params) {
 
-  int pid;
-  bool hasPath=false;  
+    int pid;
+    bool hasPath=false;  
   
-  if(program[0]=='/') {
+    if(program[0]=='/') {
 
-    hasPath == true;
+        hasPath == true;
 
-  }
+    }
 
-  char * foo[333];  
+    char * foo[333];  
 
-  for(int i=0; i<params.size(); i++) {
+    for(int i=0; i<params.size(); i++) {
 
-    foo[i] = string_to_c_convert(params[i]);
+        foo[i] = string_to_c_convert(params[i]);
 
-    if(i+1 == params.size()) {
+        if(i+1 == params.size()) {
 
-      foo[i+1] = NULL;
+            foo[i+1] = NULL;
     
-    }
-
-  }
-
-  if(hasPath == true) {
-
-    if(execv(foo[0], foo) == -1) {
-
-      cerr << "Erro: comando inexistente (path)." << endl;
+        }
 
     }
 
-    exit(0);
+    if(hasPath == true) {
 
-  }
+        if(execv(foo[0], foo) == -1) {
 
-  if(hasPath == false) {
+            cerr << "Erro: comando inexistente (path)." << endl;
 
-    if(execvp(foo[0], foo) == -1) {
+        }
 
-      cerr << "Erro: comando inexistente(no path)." << endl;
+        exit(0);
+
+    }
+
+    if(hasPath == false) {
+
+        if(execvp(foo[0], foo) == -1) {
+
+            cerr << "Erro: comando inexistente(no path)." << endl;
  
-    }
+        }
 
-    exit(0);
+        exit(0);
  
-  }  
+    }  
 
 
 }

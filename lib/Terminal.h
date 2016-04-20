@@ -9,25 +9,25 @@
 
 class Terminal {
 
-  private:
+    private:
 
-    pid_t _my_pid;
-    pid_t _parent;
-    typedef std::map<pid_t,Process*> ProcessMap;
-    ProcessMap _processes;
-    void showMap();
+        pid_t _my_pid;
+        pid_t _parent;
+        typedef std::map<pid_t,Process*> ProcessMap;
+        ProcessMap _processes;
+        void showMap();
 
-  public:
+    public:
 
-    Terminal();
-    virtual ~Terminal();
-    int run();
-    pid_t pid();
+        Terminal();
+        virtual ~Terminal();
+        int run();
+        pid_t pid();
 
-  private:
+    private:
 
-    std::string trim(std::string& str);
-    bool ultranizer(std::string cmd, std::vector<std::string> * tokens);
+        std::string trim(std::string& str);
+        bool ultranizer(std::string cmd, std::vector<std::string> * tokens);
 
 };
 

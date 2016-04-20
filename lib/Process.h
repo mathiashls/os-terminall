@@ -7,26 +7,26 @@
 
 class Process {
 
-  public:
+    public:
     
-    Process(std::string & program, std::vector<std::string> & params, bool block);
-    virtual ~Process();
+        Process(std::string & program, std::vector<std::string> & params, bool block);
+        virtual ~Process();
 
-    int espera();
-    pid_t pid();
-    int status();
-    std::string name;
+        int espera();
+        pid_t pid();
+        int status();
+        std::string name;
 
-  private:
+    private:
 
-    void exec(std::string & program, std::vector<std::string> & params);
-    static char * string_to_c_convert(const std::string & s);
+        void exec(std::string & program, std::vector<std::string> & params);
+        static char * string_to_c_convert(const std::string & s);
 
-  private:
+    private:
 
-    pid_t  _my_pid;
-    pid_t  _parent;
-    int _status;
+        pid_t  _my_pid;
+        pid_t  _parent;
+        int _status;
 
 };
 
