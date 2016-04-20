@@ -16,7 +16,7 @@ using namespace std;
 Process::Process(string & program, vector<string> & params, bool block) {
 
     int pid = fork();
-    name = program.c_str();
+    name = program;
 
     if(pid > 0) {
 
@@ -31,7 +31,6 @@ Process::Process(string & program, vector<string> & params, bool block) {
   
     } else if (pid==0) {
 
-        cout << "Vader, I'm your son!" << endl;
         exec(program, params);
 
     }
@@ -120,7 +119,6 @@ void Process::exec(string & program, vector<string> & params) {
  
     }  
 
-
 }
 
 
@@ -148,5 +146,3 @@ char * Process::string_to_c_convert(const string & s) {
     return pc;
 
 }
-
-

@@ -30,6 +30,12 @@ int Terminal::run() {
     string cmdline;
     bool lock;
     vector<string> stuart; // Don't mess with Stuart, he own all your cmd information. Powerful fella.
+
+    system("clear");
+
+    cout << "===========================================" << endl;
+    cout << "================ TerminALL ================" << endl;
+    cout << "===========================================" << endl << endl << endl;
   
     do {
 
@@ -80,11 +86,11 @@ int Terminal::run() {
   
         } else { 
 
-            Process proc(stuart[0], stuart, lock);
+            Process * proc = new Process(stuart[0], stuart, lock);
 
             if(lock == false) {
 
-                _processes.insert(make_pair(proc.pid(), &proc));
+                _processes.insert(make_pair(proc->pid(), proc));
 
             }
 
