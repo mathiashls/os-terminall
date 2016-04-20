@@ -99,14 +99,17 @@ void Terminal::showMap() {
     ProcessMap::iterator tracker = _processes.begin();
 
     system("clear");
-    cout << " PID   User  " << endl << endl;
+    cout << endl << "====== HBottom Awesome TaskPrinter ======" << endl << endl << endl; 
+    cout << "               PID   Process  " << endl << endl;
 
     do {
 
-        cout << tracker->first << "   " << tracker->second->name << endl;
+        cout << "              " << tracker->first << "   " << tracker->second->name << endl;
         tracker++;
 
     } while(tracker != _processes.end()); 
+
+    cout << endl << endl << "=========================================" << endl; 
 
 }
 
