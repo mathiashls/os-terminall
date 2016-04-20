@@ -9,8 +9,6 @@
 #include <vector>
 #include <pwd.h>
 
-//Adonis
-
 using namespace std;
 
 Terminal::Terminal() {
