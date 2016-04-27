@@ -47,7 +47,7 @@ Process::Process(string & program, vector<string> & params, bool block) {
 
 Process::~Process() {
 
-    // Self-destruction behavior can hurt you
+    // Self-destruction behavior can hurt you, be careful!
 
 }
 
